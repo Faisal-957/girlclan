@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "530647542606",
+    "project_id": "clangirl",
+    "storage_bucket": "clangirl.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:530647542606:android:ca8d772907b045e8be0c1f",
+        "android_client_info": {
+          "package_name": "com.example.girlsclan"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZ5sH_X_sqbUjvBXgQg999AkiLVtD0E14"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
