@@ -20,15 +20,18 @@ class Custom_button extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
-        height: height,
-        width: witdh,
-        decoration: BoxDecoration(
-          color: color ?? Colors.blue,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Center(
-          child: Text(title, style: style24.copyWith(color: Colors.white)),
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          height: height,
+          width: witdh,
+          decoration: BoxDecoration(
+            color: color ?? Colors.blue,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Center(
+            child: Text(title, style: style24.copyWith(color: Colors.white)),
+          ),
         ),
       ),
     );

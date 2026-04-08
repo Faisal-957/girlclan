@@ -1,12 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:girlsclan/ui/screens/auth_screens/free_screen.dart';
-import 'package:girlsclan/ui/screens/auth_screens/login_screen.dart';
 import 'package:girlsclan/ui/screens/auth_screens/signup_screen.dart';
-import 'package:girlsclan/ui/screens/splash_screen.dart';
-import 'package:girlsclan/ui/screens/welcome_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
