@@ -24,6 +24,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final FirebaseAuth auth = FirebaseAuth.instance;
   bool isLoading = false;
   bool isChecked = false;
+  final formkey = GlobalKey<FormState>();
 
   void signup() async {
     setState(() => isLoading = true);
@@ -58,77 +59,115 @@ class _SignupScreenState extends State<SignupScreen> {
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Center(child: Image.asset("$staticAssets/logo.png", scale: 4)),
-                Center(child: Text("Signup", style: style24)),
-                20.verticalSpace,
-                Text("First Name"),
-                TextFormField(
-                  controller: firstnameController,
-                  decoration: authdecoration.copyWith(hintText: "First name "),
-                ),
-                Text("Email"),
-                TextFormField(
-                  controller: emailController,
-                  decoration: authdecoration.copyWith(hintText: "Email "),
-                ),
-                Text("Password"),
-                TextFormField(
-                  controller: passwordController,
-                  decoration: authdecoration.copyWith(hintText: "Password"),
-                ),
-
-                Text("Phone Number"),
-                TextFormField(
-                  controller: phonenumberController,
-                  decoration: authdecoration.copyWith(hintText: "Phone Number"),
-                ),
-                Row(
-                  children: [
-                    Checkbox(
-                      activeColor: Colors.black,
-                      value: isChecked,
-                      onChanged: (value) {
-                        setState(() {
-                          isChecked = value!;
-                        });
-                      },
+            child: Form(
+              key: formkey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: Image.asset("$staticAssets/logo.png", scale: 4),
+                  ),
+                  Center(child: Text("Signup", style: style24)),
+                  20.verticalSpace,
+                  Text("First Name"),
+                  TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Enter your Name";
+                      }
+                      return null;
+                    },
+                    controller: firstnameController,
+                    decoration: authdecoration.copyWith(
+                      hintText: "First name ",
                     ),
-                    Text("Check if you are female."),
-                  ],
-                ),
-                isLoading
-                    ? CircularProgressIndicator()
-                    : Custom_button(
-                        color: Color(0xff119DA4),
-                        height: 50,
-                        title: "signup",
-                        witdh: 250,
-                        onTap: () {
-                          signup();
+                  ),
+                  Text("Email"),
+                  TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Enter your Email ";
+                      }
+                      return null;
+                    },
+
+                    controller: emailController,
+                    decoration: authdecoration.copyWith(hintText: "Email "),
+                  ),
+                  Text("Password"),
+                  TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Please Enter your Password";
+                      }
+                      return null;
+                    },
+                    controller: passwordController,
+                    decoration: authdecoration.copyWith(hintText: "Password"),
+                  ),
+
+                  Text("Phone Number"),
+                  TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "phone Number Requried";
+                      }
+                      return null;
+                    },
+                    controller: phonenumberController,
+                    decoration: authdecoration.copyWith(
+                      hintText: "Phone Number",
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Checkbox(
+                        activeColor: Colors.black,
+                        value: isChecked,
+                        onChanged: (value) {
+                          setState(() {
+                            isChecked = value!;
+                          });
                         },
                       ),
+                      Text("Check if you are female."),
+                    ],
+                  ),
+                  isLoading
+                      ? CircularProgressIndicator()
+                      : Custom_button(
+                          color: Color(0xff119DA4),
+                          height: 50,
+                          title: "signup",
+                          witdh: 250,
+                          onTap: () {
+                            if (formkey.currentState!.validate()) {}
+                            signup();
+                          },
+                        ),
 
-                Row(
-                  children: [
-                    Text("Already have an account? "),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => LoginScreen(),
-                          ),
-                        );
-                      },
-                      child: Text("Login", style: TextStyle(color: Colors.red)),
-                    ),
-                  ],
-                ),
-              ],
+                  Row(
+                    children: [
+                      Text("Already have an account? "),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => LoginScreen(),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          "Login",
+                          style: TextStyle(color: Colors.red),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -136,91 +175,3 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 }
-// import 'package:flutter/material.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:girlsclan/ui/screens/home.dart';
-
-// class SignupPage extends StatefulWidget {
-//   const SignupPage({super.key});
-
-//   @override
-//   State<SignupPage> createState() => _SignupPageState();
-// }
-
-// class _SignupPageState extends State<SignupPage> {
-//   final emailController = TextEditingController();
-//   final passwordController = TextEditingController();
-
-//   final FirebaseAuth auth = FirebaseAuth.instance;
-
-//   bool isLoading = false;
-
-//   void signup() async {
-//     setState(() => isLoading = true);
-
-//     try {
-//       await auth.createUserWithEmailAndPassword(
-//         email: emailController.text.trim(),
-//         password: passwordController.text.trim(),
-//       );
-//       Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
-
-//       ScaffoldMessenger.of(
-//         context,
-//       ).showSnackBar(SnackBar(content: Text("Signup Successful")));
-//     } on FirebaseAuthException catch (e) {
-//       ScaffoldMessenger.of(context).showSnackBar(
-//         SnackBar(
-//           content: Text(e.message ?? "Error"),
-//           backgroundColor: Colors.red,
-//         ),
-//       );
-//     } finally {
-//       setState(() => isLoading = false);
-//     }
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: Text("Signup")),
-//       body: Padding(
-//         padding: const EdgeInsets.all(20),
-//         child: Column(
-//           children: [
-//             TextField(
-//               controller: emailController,
-//               decoration: InputDecoration(
-//                 labelText: "Email",
-//                 border: OutlineInputBorder(),
-//               ),
-//             ),
-
-//             SizedBox(height: 15),
-
-//             TextField(
-//               controller: passwordController,
-//               obscureText: true,
-//               decoration: InputDecoration(
-//                 labelText: "Password",
-//                 border: OutlineInputBorder(),
-//               ),
-//             ),
-
-//             SizedBox(height: 20),
-
-//             isLoading
-//                 ? CircularProgressIndicator()
-//                 : SizedBox(
-//                     width: double.infinity,
-//                     child: ElevatedButton(
-//                       onPressed: signup,
-//                       child: Text("Signup"),
-//                     ),
-//                   ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
