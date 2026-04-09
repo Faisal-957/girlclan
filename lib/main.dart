@@ -18,7 +18,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       builder: (context, child) {
-        return MaterialApp(debugShowCheckedModeBanner: false, home: Home());
+        return MaterialApp(
+          theme: ThemeData(scaffoldBackgroundColor: Colors.white),
+          debugShowCheckedModeBanner: false,
+          home: Home(),
+        );
       },
     );
   }
