@@ -8,8 +8,23 @@ import 'package:girlsclan/core/constant/color.dart';
 import 'package:girlsclan/core/constant/text_style.dart';
 import 'package:girlsclan/core/constant/widgets/homepage_wigets.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  final List<Toppicks> toppic = [
+    Toppicks(image: "$staticAssets/all.png", title: "All", isSelected: false),
+    Toppicks(image: "$staticAssets/hike.png", title: "Hiking", isSelected: false),
+    Toppicks(image: "$staticAssets/music.png", title: "Music", isSelected: false),
+    Toppicks(image: "$staticAssets/all.png", title: "All", isSelected: false),
+    Toppicks(image: "$staticAssets/hike.png", title: "Hiking", isSelected: false),
+    Toppicks(image: "$staticAssets/music.png", title: "Music", isSelected: false),
+  ];
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -126,28 +141,24 @@ class Home extends StatelessWidget {
                 ),
                 SizedBox(
                   height: 50,
-                  child: ListView(
+                  child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    children: [
-                      Toppicks(image: "$staticAssets/all.png", title: "All"),
-                      Toppicks(
-                        image: "$staticAssets/hike.png",
-                        title: "Hiking",
-                      ),
-                      Toppicks(
-                        image: "$staticAssets/music.png",
-                        title: "Music",
-                      ),
-                      Toppicks(image: "$staticAssets/all.png", title: "All"),
-                      Toppicks(
-                        image: "$staticAssets/hike.png",
-                        title: "Hiking",
-                      ),
-                      Toppicks(
-                        image: "$staticAssets/music.png",
-                        title: "Music",
-                      ),
-                    ],
+                    itemCount: toppic.length,
+                    itemBuilder: (context, index) {
+                      //final item = toppic[index];
+                      return  GestureDetector(
+        onTap: () {
+          setState(() {
+            selectedIndex = index;
+          });
+        },
+        child: Toppicks(
+          image: toppic[index].image,
+          title: toppic[index].title,
+          isSelected: selectedIndex == index,
+        ),
+      );
+                    },
                   ),
                 ),
                 ListView(
@@ -194,8 +205,10 @@ class Home extends StatelessWidget {
 class Toppicks extends StatelessWidget {
   final String image;
   final String title;
+  final bool isSelected;
 
-  const Toppicks({super.key, required this.image, required this.title});
+  const Toppicks({super.key, required this.image, required this.title,required this.isSelected
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -203,12 +216,11 @@ class Toppicks extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 10),
       width: 100,
       decoration: BoxDecoration(
-        color: Color(0xffF7F7F7),
+        color: isSelected  ? Colors.blue : Colors.grey.shade200,
         borderRadius: BorderRadius.circular(100),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-
         children: [Image.asset(image, scale: 4), Text(title)],
       ),
     );
