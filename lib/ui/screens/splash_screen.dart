@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:girlsclan/core/constant/assets.dart';
 import 'package:girlsclan/main.dart';
 import 'package:girlsclan/ui/screens/auth_screens/login_screen.dart';
-import 'package:girlsclan/ui/screens/home.dart';
+import 'package:girlsclan/ui/screens/home/home.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

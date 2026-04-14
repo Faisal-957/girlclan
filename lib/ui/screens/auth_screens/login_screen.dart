@@ -6,7 +6,7 @@ import 'package:girlsclan/core/constant/text_style.dart';
 import 'package:girlsclan/core/constant/widgets/custom_button.dart';
 import 'package:girlsclan/core/constant/widgets/custom_textfoamfield.dart';
 import 'package:girlsclan/ui/screens/auth_screens/signup_screen.dart';
-import 'package:girlsclan/ui/screens/home.dart';
+import 'package:girlsclan/ui/screens/home/home.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
