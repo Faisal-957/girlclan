@@ -54,6 +54,26 @@ class Homeviewmodel extends ChangeNotifier {
       btext: "Hiking",
     ),
   ];
+  final List<Events_Continer> event = [
+    Events_Continer(
+      image: "$staticAssets/Frame45.png",
+      date: "12/08/2024",
+      title: "Wanderlight Festival",
+      add: "Tofino, British Co ...",
+    ),
+    Events_Continer(
+      image: "$staticAssets/image4.png",
+      date: "12/08/2024",
+      title: "Wanderlight Festival",
+      add: "Tofino, British Co ...",
+    ),
+    Events_Continer(
+      image: "$staticAssets/Frame45.png",
+      date: "12/08/2024",
+      title: "Wanderlight Festival",
+      add: "Tofino, British Co ...",
+    ),
+  ];
   int selectedIndex = 0;
 
   void selecteditem(int index) {

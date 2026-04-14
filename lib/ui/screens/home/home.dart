@@ -98,29 +98,21 @@ class _HomeState extends State<Home> {
                     10.verticalSpace,
                     SizedBox(
                       height: 120,
-                      child: ListView(
-                        //padding: EdgeInsets.symmetric(horizontal: 10),
+                      child: ListView.builder(
+                        shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
-                        children: [
-                          Events_Continer(
-                            image: "$staticAssets/Frame45.png",
-                            date: "12/08/2024",
-                            title: "Wanderlight Festival",
-                            add: "Tofino, British Co ...",
-                          ),
-                          Events_Continer(
-                            image: "$staticAssets/image4.png",
-                            date: "12/08/2024",
-                            title: "Wanderlight Festival",
-                            add: "Tofino, British Co ...",
-                          ),
-                          Events_Continer(
-                            image: "$staticAssets/Frame45.png",
-                            date: "12/08/2024",
-                            title: "Wanderlight Festival",
-                            add: "Tofino, British Co ...",
-                          ),
-                        ],
+                        itemCount: value.event.length,
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: () {},
+                            child: Events_Continer(
+                              image: value.event[index].image,
+                              date: value.event[index].date,
+                              title: value.event[index].title,
+                              add: value.event[index].add,
+                            ),
+                          );
+                        },
                       ),
                     ),
                     10.verticalSpace,
